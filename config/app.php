@@ -168,6 +168,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * Custom Service Providers...
+         */
+        App\Services\Currencies\CurrencyServiceProvider::class,
+        App\Services\Orders\OrderServiceProvider::class,
     ])->toArray(),
 
     /*
