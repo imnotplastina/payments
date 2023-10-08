@@ -5,7 +5,7 @@ namespace App\Services\Currencies;
 use App\Services\Currencies\Commands\InstallCurrenciesCommand;
 use Illuminate\Support\ServiceProvider;
 
-class CurrencyServideProvider extends ServiceProvider
+class CurrencyServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
