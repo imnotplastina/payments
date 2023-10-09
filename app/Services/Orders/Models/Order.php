@@ -2,7 +2,7 @@
 
 namespace App\Services\Orders\Models;
 
-use App\Services\Orders\Enums\OrderStatus;
+use App\Services\Orders\Enums\OrderStatusEnum;
 use App\Supports\AmountValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +17,7 @@ class Order extends Model
     ];
 
     protected $casts = [
-        'status' => OrderStatus::class,
+        'status' => OrderStatusEnum::class,
         'amount' => AmountValue::class,
     ];
 }
