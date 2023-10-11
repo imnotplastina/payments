@@ -22,7 +22,7 @@ class InstallOrdersFactoryCommand extends Command
     {
         $this->warn('Установка тестовых заказов');
 
-        OrderFactory::new()->create(24);
+        OrderFactory::new()->count(24)->create();
 
         $this->info('Тестовые заказы установлены');
     }

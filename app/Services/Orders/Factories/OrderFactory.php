@@ -2,7 +2,7 @@
 
 namespace App\Services\Orders\Factories;
 
-use App\Services\Orders\Enums\OrderStatus;
+use App\Services\Orders\Enums\OrderStatusEnum;
 use App\Services\Orders\Models\Order;
 use App\Supports\AmountValue;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,7 +23,7 @@ class OrderFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
-            'status' => OrderStatus::pending,
+            'status' => OrderStatusEnum::pending,
             'currency_id' => 'RUB',
             'amount' => new AmountValue(
                 $this->faker->randomFloat(2, 1, 10000)
