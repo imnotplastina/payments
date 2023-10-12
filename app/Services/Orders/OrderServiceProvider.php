@@ -3,6 +3,7 @@
 namespace App\Services\Orders;
 
 use App\Services\Orders\Commands\InstallOrdersFactoryCommand;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
 class OrderServiceProvider extends ServiceProvider
@@ -20,6 +21,10 @@ class OrderServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Relation::enforceMorphMap([
+            'order' => 'App\Services\Orders\Models\Order',
+        ]);
+
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__ . '/Migrations');
 
