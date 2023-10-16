@@ -59,7 +59,7 @@
                 </ul>
 
                 <div class="card-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('orders.payment', $order->uuid) }}" method="POST">
                         @csrf
 
                         <button type="submit" class="btn btn-primary">
