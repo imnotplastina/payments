@@ -31,7 +31,8 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('payment_methods');
 
-            $table->string('driver');
+            $table->string('driver')
+                ->nullable();
 
             $table->timestamps();
         });
