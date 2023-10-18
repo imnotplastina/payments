@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------
@@ -174,6 +174,7 @@ return [
          */
         App\Services\Currencies\CurrencyServiceProvider::class,
         App\Services\Orders\OrderServiceProvider::class,
+        App\Services\Payments\PaymentServiceProvider::class,
     ])->toArray(),
 
     /*
