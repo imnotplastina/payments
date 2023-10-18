@@ -6,9 +6,13 @@ use App\Services\Payments\Enums\PaymentDriverEnum;
 use App\Services\Payments\Enums\PaymentStatusEnum;
 use App\Supports\AmountValue;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-
+/**
+ * @property int method_id
+ * @property PaymentMethod method
+ */
 class Payment extends Model
 {
     protected $fillable = [
@@ -29,5 +33,10 @@ class Payment extends Model
     public function payable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function method(): BelongsTo
+    {
+        return $this->belongsTo(PaymentMethod::class);
     }
 }
