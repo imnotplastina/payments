@@ -73,15 +73,44 @@
                 </ul>
 
                 <div class="card-body">
-                    <form action="" method="POST">
-                        @csrf
+                    @if($methods->isEmpty())
+                        Извините, оплата временно не доступна
+                    @else
+                        @if($errors->any())
+                            <div class="mb-2 text-danger">
+                                {{ $errors->first() }}
+                            </div>
+                        @endif
 
-                        <p>Выберите способ оплаты</p>
+                        <form action="{{ route('payments.method', $payment->uuid) }}" method="POST">
+                            @csrf
 
-                        <button type="submit" class="btn btn-primary">
-                            Продолжить
-                        </button>
-                    </form>
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="mb-3 mb-md-0">
+                                        <select name="method_id" class="form-control">
+                                            <option value="">Способ оплаты</option>
+
+                                            @foreach($methods as $method)
+                                                <option value="{{ $method->id }}">
+                                                    {{ $method->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Продолжить
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    @endif
+
+
+
                 </div>
             </div>
         </div>
