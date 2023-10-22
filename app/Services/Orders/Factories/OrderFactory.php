@@ -23,7 +23,7 @@ class OrderFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
-            'status' => OrderStatusEnum::pending,
+            'status' => OrderStatusEnum::Pending,
             'currency_id' => 'RUB',
             'amount' => new AmountValue(
                 $this->faker->randomFloat(2, 1, 10000)

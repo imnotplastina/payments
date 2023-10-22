@@ -4,25 +4,40 @@ namespace App\Services\Payments\Enums;
 
 enum PaymentStatusEnum: string
 {
-    case pending = 'pending';
-    case completed = 'completed';
-    case cancelled = 'cancelled';
+    case Pending = 'pending';
+    case Completed = 'completed';
+    case Cancelled = 'cancelled';
 
     public function name(): string
     {
         return match ($this) {
-            self::pending => 'Ожидает',
-            self::completed => 'Завершено',
-            self::cancelled => 'Отменено',
+            self::Pending => 'Ожидает',
+            self::Completed => 'Завершено',
+            self::Cancelled => 'Отменено',
         };
     }
 
     public function color(): string
     {
         return match ($this) {
-            self::pending => 'warning',
-            self::completed => 'success',
-            self::cancelled => 'danger',
+            self::Pending => 'warning',
+            self::Completed => 'success',
+            self::Cancelled => 'danger',
         };
+    }
+
+    public function isPending(): bool
+    {
+        return $this === PaymentStatusEnum::Pending;
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this === PaymentStatusEnum::Completed;
+    }
+
+    public function isCancelled(): bool
+    {
+        return $this === PaymentStatusEnum::Cancelled;
     }
 }
