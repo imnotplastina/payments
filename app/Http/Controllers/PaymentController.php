@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Payment\UpdatePaymentRequest;
-use App\Services\Payments\Enums\PaymentStatusEnum;
 use App\Services\Payments\Models\Payment;
 use App\Services\Payments\Models\PaymentMethod;
 use App\Services\Payments\PaymentService;
@@ -39,19 +38,32 @@ class PaymentController extends Controller
         return redirect()->route('payments.process', compact('payment'));
     }
 
-    public function process(Payment $payment): View
+    public function process(Payment $payment, PaymentService $service): View
     {
-        return view("payments.driver.{$payment->driver->value}",
-            compact('payment')
-        );
+        $driver = $service
+            ->getDriver($payment->driver);
+
+        return $driver->view($payment);
     }
 
-    public function complete(Payment $payment): RedirectResponse
+    public function complete(Payment $payment, PaymentService $service): RedirectResponse
     {
-        $payment->status = PaymentStatusEnum::Completed;
-        $payment->save();
+        $payment = $service
+            ->completePayment($payment)
+            ->handle();
 
         return redirect()->route('payments.success', [
+            'uuid' => $payment->uuid,
+        ]);
+    }
+
+    public function cancel(Payment $payment, PaymentService $service): RedirectResponse
+    {
+        $payment = $service
+            ->cancelPayment($payment)
+            ->handle();
+
+        return redirect()->route('payments.failure', [
             'uuid' => $payment->uuid,
         ]);
     }

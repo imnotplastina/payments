@@ -3,6 +3,7 @@
 namespace App\Services\Payments;
 
 use App\Services\Orders\Models\Order;
+use App\Services\Payments\Actions\CancelPaymentAction;
 use App\Services\Payments\Actions\CompletePaymentAction;
 use App\Services\Payments\Actions\CreatePaymentAction;
 use App\Services\Payments\Actions\FindPaymentMethodAction;
@@ -38,5 +39,10 @@ class PaymentService
     public function completePayment(Payment $payment): CompletePaymentAction
     {
         return new CompletePaymentAction($payment);
+    }
+
+    public function cancelPayment(Payment $payment): CancelPaymentAction
+    {
+        return new CancelPaymentAction($payment);
     }
 }
