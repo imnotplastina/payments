@@ -3,6 +3,7 @@
 namespace App\Services\Payments;
 
 use App\Services\Orders\Models\Order;
+use App\Services\Payments\Actions\CompletePaymentAction;
 use App\Services\Payments\Actions\CreatePaymentAction;
 use App\Services\Payments\Actions\FindPaymentMethodAction;
 use App\Services\Payments\Actions\UpdatePaymentMethodAction;
@@ -32,5 +33,10 @@ class PaymentService
     public function updatePaymentMethod(PaymentMethod $method, Payment $payment): UpdatePaymentMethodAction
     {
         return new UpdatePaymentMethodAction($method, $payment);
+    }
+
+    public function completePayment(Payment $payment): CompletePaymentAction
+    {
+        return new CompletePaymentAction($payment);
     }
 }
