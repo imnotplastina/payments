@@ -8,6 +8,12 @@ use App\Supports\AmountValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int id
+ * @property string uuid
+ * @property string currency_id
+ * @property AmountValue amount
+ */
 class Order extends Model implements Payable
 {
     use HasFactory;
@@ -46,5 +52,10 @@ class Order extends Model implements Payable
     public function getPayableId(): int
     {
         return $this->id;
+    }
+
+    public function getPayableUrl(): string
+    {
+        return route('orders.show', $this->uuid);
     }
 }
