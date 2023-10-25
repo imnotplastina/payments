@@ -3,6 +3,7 @@
 namespace App\Services\Payments\Actions;
 
 use App\Services\Payments\Enums\PaymentStatusEnum;
+use App\Services\Payments\Events\PaymentCompletedEvent;
 use App\Services\Payments\Models\Payment;
 
 final class CompletePaymentAction
@@ -17,6 +18,8 @@ final class CompletePaymentAction
        $this->payment->update([
            'status' => PaymentStatusEnum::Completed,
        ]);
+
+       event(new PaymentCompletedEvent($this->payment));
 
        return $this->payment;
     }
