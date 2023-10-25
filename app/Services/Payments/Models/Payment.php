@@ -2,6 +2,7 @@
 
 namespace App\Services\Payments\Models;
 
+use App\Services\Orders\Models\Order;
 use App\Services\Payments\Enums\PaymentDriverEnum;
 use App\Services\Payments\Enums\PaymentStatusEnum;
 use App\Supports\AmountValue;
@@ -11,7 +12,11 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * @property int method_id
+ * @property string uuid
  * @property PaymentMethod method
+ * @property PaymentStatusEnum status
+ * @property PaymentDriverEnum driver
+ * @property Order payable
  */
 class Payment extends Model
 {
