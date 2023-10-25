@@ -3,7 +3,9 @@
 namespace App\Services\Orders\Models;
 
 use App\Services\Orders\Enums\OrderStatusEnum;
+use App\Services\Orders\OrderService;
 use App\Services\Payments\Contracts\Payable;
+use App\Services\Payments\Models\Payment;
 use App\Supports\AmountValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -57,5 +59,12 @@ class Order extends Model implements Payable
     public function getPayableUrl(): string
     {
         return route('orders.show', $this->uuid);
+    }
+
+    public function onPaymentComplete(): void
+    {
+        (new OrderService)
+            ->completeOrder($this)
+            ->handle();
     }
 }
