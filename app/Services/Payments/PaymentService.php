@@ -8,6 +8,7 @@ use App\Services\Payments\Actions\CompletePaymentAction;
 use App\Services\Payments\Actions\CreatePaymentAction;
 use App\Services\Payments\Actions\FindPaymentMethodAction;
 use App\Services\Payments\Actions\UpdatePaymentMethodAction;
+use App\Services\Payments\Contracts\Payable;
 use App\Services\Payments\Drivers\PaymentDriver;
 use App\Services\Payments\Drivers\PaymentDriverFactory;
 use App\Services\Payments\Enums\PaymentDriverEnum;
@@ -21,9 +22,9 @@ class PaymentService
         return (new PaymentDriverFactory)->make($driver);
     }
 
-    public function createPayment(Order $order): CreatePaymentAction
+    public function createPayment(Payable $payable): CreatePaymentAction
     {
-        return new CreatePaymentAction($order);
+        return new CreatePaymentAction($payable);
     }
 
     public function findPaymentMethod(string $methodId): FindPaymentMethodAction
