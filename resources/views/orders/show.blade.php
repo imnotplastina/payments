@@ -58,15 +58,17 @@
                     </li>
                 </ul>
 
-                <div class="card-body">
-                    <form action="{{ route('orders.payment', $order->uuid) }}" method="POST">
-                        @csrf
+                @if($order->status->isPending())
+                    <div class="card-body">
+                        <form action="{{ route('orders.payment', $order->uuid) }}" method="POST">
+                            @csrf
 
-                        <button type="submit" class="btn btn-primary">
-                            Перейти к оплате
-                        </button>
-                    </form>
-                </div>
+                            <button type="submit" class="btn btn-primary">
+                                Перейти к оплате
+                            </button>
+                        </form>
+                    </div>
+                @endif
             </div>
         </div>
     </section>

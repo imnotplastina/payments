@@ -2,6 +2,7 @@
 
 namespace App\Services\Orders\Enums;
 
+
 enum OrderStatusEnum: string
 {
     case Pending = 'pending';
@@ -24,5 +25,20 @@ enum OrderStatusEnum: string
             self::Completed => 'success',
             self::Cancelled => 'danger',
         };
+    }
+
+    public function isPending(): bool
+    {
+        return $this === OrderStatusEnum::Pending;
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this === OrderStatusEnum::Completed;
+    }
+
+    public function isCancelled(): bool
+    {
+        return $this === OrderStatusEnum::Cancelled;
     }
 }
