@@ -12,8 +12,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="{{ route('orders') }}" class="nav-link active">
+                    <a href="{{ route('orders') }}" class="nav-link {{ active_link('orders', 'text-primary') }}">
                         Мои заказы
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('subscriptions') }}" class="nav-link {{ active_link('subscriptions', 'text-primary') }}">
+                        Подписки
                     </a>
                 </li>
             </ul>
