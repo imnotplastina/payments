@@ -3,10 +3,12 @@
 namespace App\Services\Tinkoff;
 
 use App\Services\Tinkoff\Actions\CancelPaymentAction;
+use App\Services\Tinkoff\Actions\CheckCallbackAction;
 use App\Services\Tinkoff\Actions\CreatePaymentAction;
 use App\Services\Tinkoff\Actions\FindPaymentAction;
 use App\Services\Tinkoff\DTO\CreatePaymentData;
 use App\Services\Tinkoff\Entities\TinkoffEntity;
+use App\Services\Tinkoff\Exceptions\InvalidTokenException;
 
 class TinkoffService
 {
@@ -31,5 +33,14 @@ class TinkoffService
     {
         return CancelPaymentAction::make($this->config)
             ->handle($id);
+    }
+
+    /**
+     * @throws InvalidTokenException
+     */
+    public function checkCallback(array $data): TinkoffEntity
+    {
+        return CheckCallbackAction::make($this->config)
+            ->handle($data);
     }
 }
