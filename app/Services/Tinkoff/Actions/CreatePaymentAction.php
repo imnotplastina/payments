@@ -22,11 +22,14 @@ final class CreatePaymentAction
 
     public function handle(CreatePaymentData $data): TinkoffEntity
     {
-        $response = TinkoffClient::post('/Create', [
-                'TinkoffKey' => $this->tinkoff->terminal,
-                'Amount' => $data->amount,
-                'OrderId' => $data->order,
-            ]);
+        $response = TinkoffClient::post('/Init', [
+            'TinkoffKey' => $this->tinkoff->terminal,
+            'Amount' => $data->amount,
+            'OrderId' => $data->order,
+            'SuccessURL' => $data->successUrl,
+            'failURL' => $data->failureUrl,
+            'NotificationURL' => $data->callbackUrl,
+        ]);
 
         return new TinkoffEntity(
             id: $response['PaymentId'],

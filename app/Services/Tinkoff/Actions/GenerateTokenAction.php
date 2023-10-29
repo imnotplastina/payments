@@ -18,6 +18,12 @@ final class GenerateTokenAction
 
     public function handle(array $data): string
     {
+        unset($data['Token']);
+
+        if (isset($data['Success'])) {
+            $data['Success'] = $data['Success'] ? 'true' : 'false';
+        }
+
         $data['Password'] = $this->config->password;
 
         return hash('sha256', collect($data)
