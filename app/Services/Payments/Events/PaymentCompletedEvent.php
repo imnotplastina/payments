@@ -14,6 +14,4 @@ class PaymentCompletedEvent
     ) {
         $this->payment->payable->onPaymentComplete();
     }
-
-
 }
