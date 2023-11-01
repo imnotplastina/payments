@@ -21,12 +21,12 @@ class InstallPaymentsCommand extends Command
     {
         $this->warn('Установка платежей...');
 
-        $this->createPaymentMethod();
+        $this->createPaymentMethods();
 
         $this->info('Платежи установлены');
     }
 
-    private function createPaymentMethod(): void
+    private function createPaymentMethods(): void
     {
         PaymentMethod::query()
             ->firstOrCreate([
@@ -34,6 +34,14 @@ class InstallPaymentsCommand extends Command
             ], [
                 'name' => 'Тестовый способ',
                 'active' => !app()->isProduction(),
+            ]);
+
+        PaymentMethod::query()
+            ->firstOrCreate([
+                'driver' => 'tinkoff'
+            ], [
+                'name' => 'Банковской картой',
+                'active' => true,
             ]);
     }
 }

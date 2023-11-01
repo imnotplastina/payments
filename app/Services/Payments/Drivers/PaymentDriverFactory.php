@@ -3,7 +3,7 @@
 namespace App\Services\Payments\Drivers;
 
 use App\Services\Payments\Enums\PaymentDriverEnum;
-use http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 
 class PaymentDriverFactory
 {
@@ -11,6 +11,7 @@ class PaymentDriverFactory
     {
         return match ($driver) {
             PaymentDriverEnum::Test => new TestPaymentDriver,
+            PaymentDriverEnum::Tinkoff => new TinkoffPaymentDriver(),
 
             default => throw new InvalidArgumentException(
                 "Драйвер [{$driver->value}] не поддерживается"),
