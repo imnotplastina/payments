@@ -39,7 +39,7 @@ final class CheckCallbackAction
             status: TinkoffPaymentStatusEnum::from('NEW'),
             order: $data['OrderId'],
             amount: $data['Amount'],
-            url: $data['PaymentUrl'],
+            url: $data['PaymentURL'],
         );
     }
 }

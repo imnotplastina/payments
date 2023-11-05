@@ -22,7 +22,7 @@ final class CancelPaymentAction
     public function handle(string $id): TinkoffEntity
     {
         $data = [
-            'PaymentKey' => $this->tinkoff->terminal,
+            'TerminalKey' => $this->tinkoff->terminal,
             'PaymentId' => $id,
         ];
 

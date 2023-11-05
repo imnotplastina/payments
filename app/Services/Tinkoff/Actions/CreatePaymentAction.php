@@ -2,11 +2,13 @@
 
 namespace App\Services\Tinkoff\Actions;
 
-use App\Services\Tinkoff\DTO\CreatePaymentData;
+use App\Services\Tinkoff\DTOs\CreatePaymentData;
 use App\Services\Tinkoff\Entities\TinkoffEntity;
 use App\Services\Tinkoff\Enums\TinkoffPaymentStatusEnum;
+use App\Services\Tinkoff\Exceptions\TinkoffException;
 use App\Services\Tinkoff\TinkoffClient;
 use App\Services\Tinkoff\TinkoffConfig;
+use Illuminate\Support\Facades\Http;
 
 final class CreatePaymentAction
 {
@@ -20,15 +22,20 @@ final class CreatePaymentAction
         return new self($tinkoff);
     }
 
+    /**
+     * @throws TinkoffException
+     */
     public function handle(CreatePaymentData $data): TinkoffEntity
     {
         $response = TinkoffClient::post('/Init', [
-            'TinkoffKey' => $this->tinkoff->terminal,
+            'TerminalKey' => $this->tinkoff->terminal,
             'Amount' => $data->amount,
-            'OrderId' => $data->order,
-            'SuccessURL' => $data->successUrl,
-            'failURL' => $data->failureUrl,
-            'NotificationURL' => $data->callbackUrl,
+            'OrderId' => $data->orderId,
+            'Token' => GenerateTokenAction::make($this->tinkoff)
+                ->handle((array) $data),
+//            'SuccessURL' => $data->successUrl,
+//            'FailURL' => $data->failureUrl,
+//            'NotificationURL' => $data->callbackUrl,
         ]);
 
         return new TinkoffEntity(
@@ -36,7 +43,7 @@ final class CreatePaymentAction
             status: TinkoffPaymentStatusEnum::from('NEW'),
             order: $response['OrderId'],
             amount: $response['Amount'],
-            url: $response['PaymentUrl'],
+            url: $response['PaymentURL'],
         );
     }
 }
