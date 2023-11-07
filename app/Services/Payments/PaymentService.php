@@ -7,6 +7,7 @@ use App\Services\Payments\Actions\CancelPaymentAction;
 use App\Services\Payments\Actions\CompletePaymentAction;
 use App\Services\Payments\Actions\CreatePaymentAction;
 use App\Services\Payments\Actions\FindPaymentMethodAction;
+use App\Services\Payments\Actions\GetPaymentAction;
 use App\Services\Payments\Actions\UpdatePaymentMethodAction;
 use App\Services\Payments\Contracts\Payable;
 use App\Services\Payments\Drivers\PaymentDriver;
@@ -25,6 +26,11 @@ class PaymentService
     public function createPayment(Payable $payable): CreatePaymentAction
     {
         return new CreatePaymentAction($payable);
+    }
+
+    public function getPayment(string $uuid): GetPaymentAction
+    {
+        return new GetPaymentAction($uuid);
     }
 
     public function findPaymentMethod(string $methodId): FindPaymentMethodAction
