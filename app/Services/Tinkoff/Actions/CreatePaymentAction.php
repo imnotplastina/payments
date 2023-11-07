@@ -31,11 +31,11 @@ final class CreatePaymentAction
             'TerminalKey' => $this->tinkoff->terminal,
             'Amount' => $data->amount,
             'OrderId' => $data->orderId,
+            'SuccessURL' => $data->successUrl,
+            'FailURL' => $data->failureUrl,
+//            'NotificationURL' => $data->callbackUrl,
             'Token' => GenerateTokenAction::make($this->tinkoff)
                 ->handle((array) $data),
-//            'SuccessURL' => $data->successUrl,
-//            'FailURL' => $data->failureUrl,
-//            'NotificationURL' => $data->callbackUrl,
         ]);
 
         return new TinkoffEntity(

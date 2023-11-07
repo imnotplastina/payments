@@ -4,6 +4,7 @@ namespace App\Services\Tinkoff\Actions;
 
 use App\Services\Tinkoff\Entities\TinkoffEntity;
 use App\Services\Tinkoff\Enums\TinkoffPaymentStatusEnum;
+use App\Services\Tinkoff\Exceptions\TinkoffException;
 use App\Services\Tinkoff\TinkoffClient;
 use App\Services\Tinkoff\TinkoffConfig;
 
@@ -19,6 +20,9 @@ final class CancelPaymentAction
         return new self($tinkoff);
     }
 
+    /**
+     * @throws TinkoffException
+     */
     public function handle(string $id): TinkoffEntity
     {
         $data = [

@@ -21,8 +21,8 @@ final class GenerateTokenAction
     {
         unset(
             $data['Token'],
-            $data['successUrl'],
-            $data['failureUrl'],
+//            $data['successUrl'],
+//            $data['failureUrl'],
             $data['callbackUrl']
         );
 
