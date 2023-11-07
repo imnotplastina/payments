@@ -33,6 +33,9 @@ return new class extends Migration
 
             $table->string('driver')
                 ->nullable();
+            $table->string('driver_payment_id')
+                ->nullable()
+                ->comment('ID платежа у провайдера');
 
             $table->timestamps();
         });
