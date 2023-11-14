@@ -15,6 +15,9 @@ return new class extends Migration
             $table->string('id')->unique(); // RUB, USD, BTC etc...
             $table->string('name');
 
+            $table->decimal('price', 21, 8);
+            $table->string('source');
+
             $table->timestamps();
         });
     }
