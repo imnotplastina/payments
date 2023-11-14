@@ -3,6 +3,7 @@
 namespace App\Services\Currencies;
 
 use App\Services\Currencies\Commands\InstallCurrenciesCommand;
+use App\Services\Currencies\Commands\UpdateCurrenciesPricesCommand;
 use Illuminate\Support\ServiceProvider;
 
 class CurrencyServiceProvider extends ServiceProvider
@@ -25,6 +26,7 @@ class CurrencyServiceProvider extends ServiceProvider
 
             $this->commands([
                 InstallCurrenciesCommand::class,
+                UpdateCurrenciesPricesCommand::class,
             ]);
         }
     }

@@ -21,8 +21,10 @@ class InstallCurrenciesCommand extends Command
     {
         $this->warn('Установка валют...');
 
-        Currency::query()
-            ->firstOrCreate(['id' => 'RUB'], ['name' => 'Рубли']);
+        $query = Currency::query();
+
+        $query->firstOrCreate(['id' => Currency::RUB], ['name' => 'Рубли']);
+        $query->firstOrCreate(['id' => Currency::USD], ['name' => 'Доллары']);
 
         $this->info('Валюты установлены');
     }
