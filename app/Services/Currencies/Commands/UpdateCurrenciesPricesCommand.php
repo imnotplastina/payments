@@ -27,7 +27,7 @@ class UpdateCurrenciesPricesCommand extends Command
         $this->warn('Обновление курсов валют...');
 
         $source = $service->getSource(
-            SourceEnum::CBRF
+            SourceEnum::from($this->argument('source'))
         );
 
         $service->updatePrices($source)
