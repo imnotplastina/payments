@@ -19,6 +19,7 @@ class UpdateCurrenciesPricesCommand extends Command
 
     /**
      * Execute the console command.
+     *
      * @throws SourceException
      */
     public function handle(CurrencyService $service): void
@@ -26,7 +27,7 @@ class UpdateCurrenciesPricesCommand extends Command
         $this->warn('Обновление курсов валют...');
 
         $source = $service->getSource(
-            SourceEnum::from($this->argument('source'))
+            SourceEnum::CBRF
         );
 
         $service->updatePrices($source)

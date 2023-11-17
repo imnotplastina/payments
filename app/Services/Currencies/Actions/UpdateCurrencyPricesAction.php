@@ -16,7 +16,7 @@ final class UpdateCurrencyPricesAction
     /**
      * @throws SourceException
      */
-    public function handle(): array
+    public function handle(): void
     {
         $currencies = Currency::query()
             ->where('source', $this->source->enum())
@@ -31,7 +31,7 @@ final class UpdateCurrencyPricesAction
                 'Не удалось получить цену валюты ' . $currency->id
             );
 
-            $currency->update(['price' => $price]);
+            $currency->update(['price' => $price->value]);
         }
     }
 }
