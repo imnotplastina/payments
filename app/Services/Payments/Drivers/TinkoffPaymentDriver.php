@@ -4,12 +4,16 @@ namespace App\Services\Payments\Drivers;
 
 use App\Services\Payments\Models\Payment;
 use App\Services\Tinkoff\DTOs\CreatePaymentData;
+use App\Services\Tinkoff\Exceptions\TinkoffException;
 use App\Services\Tinkoff\TinkoffConfig;
 use App\Services\Tinkoff\TinkoffService;
 use Illuminate\Contracts\View\View;
 
 class TinkoffPaymentDriver extends PaymentDriver
 {
+    /**
+     * @throws TinkoffException
+     */
     public function view(Payment $payment): View
     {
         $service = new TinkoffService(
@@ -19,7 +23,7 @@ class TinkoffPaymentDriver extends PaymentDriver
             )
         );
 
-        $payment = $service->createPayment(
+        $paymentEntity = $service->createPayment(
             new CreatePaymentData(
                 amount: $payment->amount->value() * 100,
                 orderId: $payment->uuid,
@@ -29,6 +33,8 @@ class TinkoffPaymentDriver extends PaymentDriver
             )
         );
 
-        return view('payments::tinkoff', compact('payment'));
+        $payment->update(['driver_payment_id' => $paymentEntity->id]);
+
+        return view('payments::tinkoff', compact('payment', 'paymentEntity'));
     }
 }
