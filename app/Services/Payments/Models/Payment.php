@@ -16,7 +16,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property PaymentMethod method
  * @property PaymentStatusEnum status
  * @property PaymentDriverEnum driver
+ * @property AmountValue amount
  * @property Order payable
+ * @property ?string driver_payment_id
  */
 class Payment extends Model
 {
@@ -26,7 +28,7 @@ class Payment extends Model
         'currency_id', 'amount',
         'payable_id', 'payable_type',
         'method_id',
-        'driver',
+        'driver', 'driver_payment_id',
     ];
 
     protected $casts = [
