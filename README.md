@@ -19,4 +19,8 @@
 
 При необходимости 
 - Обновить курсы валют ```sail artisan currencies:prices CBRF```
+- Укажите в .env тестовый терминал Tinkoff из личного кабинета мерчанта
+
+TINKOFF_TERMINAL=...   
+TINKOFF_PASSWORD=...
 
